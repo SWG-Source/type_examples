@@ -1,0 +1,239 @@
+//===================================================================
+//
+// Component Appearance Template (.cmp) Example Template
+//
+// @author Aconite
+// @since SWG Source 2022
+// @see clientObject/ComponentAppearanceTemplate.cpp
+// @see sharedObject/AppearanceTemplate.cpp
+//
+//===================================================================
+
+#pragma extension "cmp"
+
+form "CMPA"
+{
+	// version 5 (latest)
+	form "0005"
+	{
+		// appearance template
+		form "APPR"
+		{
+			// version 3 (latest)
+			form "0003"
+			{
+				// extents
+				// tags can be any of (includes examples of all):
+				// EXBX (box extent)
+				// XCYL (cylinder extent)
+				// CMSH (mesh extent)
+				// EXSB (sphere extent)
+				// see: sharedCollision/extent/* and /ExtentList.cpp
+				
+				// -------------------- ex: box extent
+				// box extent
+				form "EXBX"
+				{
+					// version 1 (latest)
+					form "0001"
+					{
+						// sphere extent (internal to box extent)
+						form "EXSP"
+						{
+							// version 1 (latest)
+							form "0001"
+							{
+								chunk "SPHR"
+								{
+									// center point as float vector (x, y, z)
+									float 0 // x
+									float 0 // y
+									float 0 // z
+									// radius
+									float 0
+								}
+							}
+						}
+						// box
+						chunk "BOX " // note: this is a TAG3
+						{
+							// max size as float vector (x, y, z)
+							float 0 // x
+							float 0 // y
+							float 0 // z
+							// min size as float vector (x, y, z)
+							float 0 // x
+							float 0 // y
+							float 0 // z
+						}
+					}
+				}
+				
+				// -------------------- ex: cylinder extent
+				// cylinder extent
+				form "XCYL"
+				{
+					// version 0 (latest)
+					form "0000"
+					{
+						chunk "CYLN"
+						{
+							// cylinder base as float vector (x, y, z)
+							float 0 // x
+							float 0 // y
+							float 0 // z
+							// radius
+							float 0
+							// height
+							float 0
+						}
+					}
+				}
+			
+				// -------------------- ex: mesh extent
+				// mesh extent
+				form "CMSH"
+				{
+					// version 0 (latest)
+					form "0000"
+					{
+						// indexed triangle list
+						form "IDTL"
+						{
+							// version 0 (latest)
+							form "0000"
+							{
+								chunk "VERT"
+								{
+									// float vector for each verticies
+									float 0 // x
+									float 0 // y
+									float 0 // z
+								}
+								chunk "INDX"
+								{
+									// int32 for each index
+									int32 0
+								}
+							}
+						}
+					}
+				}
+				
+				// -------------------- ex: sphere extent
+				// sphere extent
+				form "EXSP"
+				{
+					// version 1 (latest)
+					form "0001"
+					{
+						chunk "SPHR"
+						{
+							// center point as float vector (x, y, z)
+							float 0 // x
+							float 0 // y
+							float 0 // z
+							// radius
+							float 0
+						}
+					}
+				}
+				
+				// ===
+				// collision extents
+				//
+				// repeat above for loading collision extents (separate from regular extents)
+				// see: sharedObject/AppearanceTemplate.cpp
+				// ===
+				
+				// hardpoitns
+				// note: this form is optional and may not be in all files
+				form "HPTS"
+				{
+					// each chunk in this form is a hard point (for each)
+					chunk "HPNT"
+					{
+						// hardpoint transform position
+						// this is a 3x4 projection matrix, see: sharedMath/Transform.cpp
+						float 0 // p1
+						float 0 // p2
+						float 0 // p3
+						float 0 // p4
+						float 0 // p5
+						float 0 // p6
+						float 0 // p7
+						float 0 // p8
+						float 0 // p9
+						float 0 // p10
+						float 0 // p11
+						float 0 // p12
+						// hardpoint name
+						cstring ""
+					}
+				}
+				
+				// floors
+				form "FLOR"
+				{
+					chunk "DATA"
+					{
+						// has floor (0/1)
+						int8 0
+						// if has floor, floor name
+						cstring ""
+					}
+				}
+			}
+		}
+		// radar shape
+		form "RADR"
+		{
+			chunk "INFO"
+			{
+				// has radar shape (0/1)
+				int32 0
+				// if has radar shape, indexed triangle list for shape
+				form "IDTL"
+				{
+					// version 0 (latest)
+					form "0000"
+					{
+						chunk "VERT"
+						{
+							// float vector for each verticies
+							float 0 // x
+							float 0 // y
+							float 0 // z
+						}
+						chunk "INDX"
+						{
+							// int32 for each index
+							int32 0
+						}
+					}
+				}
+			}
+		}
+		// parts
+		// for each PART chunk hereunder
+		chunk "PART"
+		{
+			// name
+			cstring ""
+			// part transform position
+			// this is a 3x4 projection matrix, see: sharedMath/Transform.cpp
+			float 0 // p1
+			float 0 // p2
+			float 0 // p3
+			float 0 // p4
+			float 0 // p5
+			float 0 // p6
+			float 0 // p7
+			float 0 // p8
+			float 0 // p9
+			float 0 // p10
+			float 0 // p11
+			float 0 // p12
+		}
+	}
+}

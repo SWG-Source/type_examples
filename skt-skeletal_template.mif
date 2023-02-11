@@ -1,0 +1,106 @@
+//===================================================================
+//
+// Skeleton Template (.skt) Example Template
+//
+// @author Aconite
+// @since SWG Source 2022
+// @see clientSkeletalAnimation/LodSkeletonTemplate.cpp
+// @see clientSkeletalAnimation/BasicSkeletonTemplate.cpp
+//
+//===================================================================
+//
+// Notes:
+// 
+// For general information on skeletal rigging, there is helpful information
+// available here: https://cseweb.ucsd.edu/classes/sp16/cse169-a/readings/2-Skeleton.html
+// that covers an introdution, pre/post multiplication, and joint concepts
+// 
+// "Bind Pose" is a term adopted from Maya that means the rest position of the skeleton
+// with no movement applied to it and without any deformations
+//
+//===================================================================
+
+#pragma extension "skt"
+
+form "SLOD"
+{	
+	// version 0 (latest)
+	form "0000"
+	{
+		// info
+		chunk "INFO"
+		{
+			// level of detail count
+			// note: expected range is > 1 && < 4
+			int16 0
+		}
+		// for each level of detail count
+		// skeletal template
+		form "SKTM"
+		{
+			// version 2 (latest)
+			form "0002"
+			{
+				// info
+				chunk "INFO"
+				{
+					// joint count
+					// note: max expected joint count is 250
+					int32 0
+				}
+				// joint names
+				chunk "NAME"
+				{
+					// for each joint count
+					// joint name
+					// e.g., root, spine, rwrist, etc.
+					cstring ""
+				}
+				// joint parents
+				chunk "PRNT"
+				{
+					// for each joint count
+					// joint parent, reference by index
+					// note: first joint (root) is -1, indicating there are no parents, and joints connected to root use 0
+					int32 0
+				}
+				// pre-multiply rotations
+				chunk "RPRE"
+				{
+					// for each joint count
+					// rotation as float quaternion (w, x, y, z)
+					float 0 // w
+					float 0 // x
+					float 0 // y
+					float 0 // z
+				}
+				// post-multiply rotations
+				chunk "RPST"
+				{
+					// for each joint count
+					// rotation as float quaternion (w, x, y, z)
+					float 0 // w
+					float 0 // x
+					float 0 // y
+					float 0 // z
+				}
+				// bind-pose translations
+				chunk "BPTR"
+				{
+					// for each joint count
+					// bind pose as float vector (x, y, z)
+					float 0 // x
+					float 0 // y
+					float 0 // z
+				}
+				// bind-pose rotation order
+				chunk "JROR"
+				{
+					// for each joint count
+					// joint rotation order
+					int32 0
+				}
+			}
+		}
+	}
+}

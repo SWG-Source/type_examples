@@ -1,0 +1,559 @@
+//===================================================================
+//
+// Logical Animation Table (.lat) Example Template
+//
+// @author Aconite
+// @since SWG Source 2022
+// @see clientSkeletalAnimation/LogicalAnimationTableTemplate.cpp
+//
+//===================================================================
+
+#pragma extension "lat"
+
+form "LATT"
+{
+	// version 0 (latest)
+	form "0000"
+	{
+		chunk "INFO"
+		{
+			// animation state hierarchy (ASH) template name
+			// e.g., appearance/ash/all_b.ash
+			cstring ""
+			// number of animation entries
+			int16 0
+		}
+		// for each number of animation entries from INFO chunk
+		form "ANIM"
+		{
+			chunk "INFO"
+			{
+				// logical animation name
+				// e.g., loop_pistol_standing
+				cstring ""
+			}
+			// potential FORM options:
+			// SPAT - Speed Seketal Animation Template
+			// SSAT - String Selector Skeletal Animation Template
+			// AGAT - Action Generator Skeletal Animation Template
+			// CKAT - Compressed Keyframe Animation Template
+			// DRAT - Directional Skeletal Animation Template
+			// KFAT - Keyframe Skeletal Animation Template
+			// PBAT - Priority Blend Animation Template
+			// PXAT - Proxy Skeletal Animation Template
+			// TSCL - Time Scale Skeletal Animation Template
+			// YWAT - Yaw Skeletal Animation Template
+			
+			// -------------------- ex: action generator skeletal animation template
+			form "AGAT"
+			{
+				chunk "INFO"
+				{
+					// min action elapsed time
+					float 0
+					// max action elapsed time
+					float 0
+				}
+				chunk "ACTN"
+				{
+					// action count
+					int16 0
+					// for each action count
+					// action name
+					cstring ""
+					// relative weight
+					float 0
+				}
+				// looping animation template
+				form "LOOP"
+				{
+					// insert here any of the available animation TAGS as children (e.g. SSAT, PBAT)
+				}
+			}
+			
+			// -------------------- ex: compressed keyframe skeletal animation template
+			form "CKAT"
+			{
+				// version 1 (latest)
+				form "0001"
+				{
+					// general animation information
+					chunk "INFO"
+					{
+						// frames per second
+						float 0
+						// frame count
+						int16 0
+						// transform info count
+						int16 0
+						// rotation channel count
+						int16 0
+						// static rotation count
+						int16 0
+						// translation channel count
+						int16 0
+						// static translation count
+						int16 0
+					}
+					// transform info
+					form "XFRM"
+					{
+						// for each of transform info count from INFO chunk
+						chunk "XFIN"
+						{
+							// name
+							// e.g., leftear01
+							cstring ""
+							// has animated rotations? (0/1)
+							int8 0
+							// rotation channel index
+							int16 0
+							// translation mask
+							uint8 0
+							// x translation channel index 
+							int16 0
+							// y translation channel index
+							int16 0
+							// z translation channel index
+							int16 0
+						}
+					}
+					// animated rotation channels
+					form "AROT"
+					{
+						// for each rotation channel count from INFO chunk
+						chunk "QCHN"
+						{
+							// key count
+							int16 0
+							// compression format
+							int8 0 // x
+							int8 0 // y
+							int8 0 // z
+							// for each key count
+							// frame number
+							uint16 0
+							// compressed rotation
+							uint32 0
+						}
+					}
+					// static rotation data
+					chunk "SROT"
+					{
+						// for each of static rotation count from INFO chunk
+						// x format
+						uint8 0
+						// y format
+						uint8 0
+						// z format
+						uint8 0
+						// compressed rotation value
+						uint32 0
+					}
+					// animated translation channels
+					form "ATRN"
+					{
+						// for each of translation channel count from INFO chunk
+						chunk "CHNL"
+						{
+							// key count
+							int16 0
+							// for each key count
+							// frame number
+							int16 0
+							// value
+							float 0
+						}
+					}
+					// static translation data
+					chunk "STRN"
+					{
+						// for each of static translation count from INFO chunk
+						// static translation
+						float 0
+					}
+					// animation messages
+					form "MSGS"
+					{
+						chunk "INFO"
+						{
+							// number of messages
+							int16 0
+						}
+						// for each message
+						chunk "MESG"
+						{
+							// signal count
+							int16 0
+							// signal name
+							// e.g., event_vocalize
+							cstring ""
+							// for each signal count
+							// trigger frame number
+							int16 0
+						}
+					}
+					// locomotion translation data
+					chunk "LOCT"
+					{
+						// average translational speed
+						float 0
+						// key count
+						int16 0
+						// for each key count
+						// frame number
+						int16 0
+						// translation as float vector (x, y, z)
+						float 0 // x
+						float 0 // y
+						float 0 // z
+					}
+					// locomotion rotation data
+					chunk "QCHN"
+					{
+						// key count
+						int16 0
+						// compression format
+						int8 0 // x
+						int8 0 // y
+						int8 0 // z
+						// for each key count
+						// frame number
+						uint16 0
+						// compressed rotation
+						uint32 0
+					}
+				}
+			}
+			
+			// -------------------- ex: directional skeletal animation template
+			form "DRAT"
+			{
+				// version 0 (latest)
+				form "0000"
+				{
+					chunk "INFO"
+					{
+						// direction count
+						int8 0
+					}
+					// for each direction count
+					form "DIR " // note this is a TAG3
+					{
+						chunk "INFO"
+						{
+							// encoded direction (BINARY2)
+							// forward left = 0x01
+							// forward = 0x02
+							// forward right = 0x04
+							// right = 0x08
+							// backward right = 0x10
+							// backward = 0x20
+							// backward left = 0x40
+							// left = 0x80
+							int8 0x01
+						}
+						// insert here any of the available animation TAGS as children (e.g. SSAT, PBAT)
+					}
+				}
+			}
+			
+			// -------------------- ex: keyframe skeletal animation template
+			// note: the difference between this and compressed is this uses wider/normal types
+			form "KFAT"
+			{
+				// version 3 (latest)
+				form "0003"
+				{
+					chunk "INFO"
+					{
+						// frames per second
+						float 0
+						// frame count
+						int32 0
+						// transform info count
+						int32 0
+						// rotation channel count
+						int32 0
+						// static rotation count
+						int32 0
+						// translation channel count
+						int32 0
+						// static translation count
+						int32 0						
+					}
+					// transform info
+					form "XFRM"
+					{
+						chunk "XFIN"
+						{
+						// name
+						// e.g., leftear01
+						cstring ""
+						// has animated rotations? (0/1)
+						int8 0
+						// rotation channel index
+						int32 0
+						// translation mask
+						uint32 0
+						// x translation channel index 
+						int32 0
+						// y translation channel index
+						int32 0
+						// z translation channel index
+						int32 0		
+						}
+					}
+					// animation rotation channels
+					form "AROT"
+					{
+						// for each rotation channel count from INFO chunk
+						chunk "QCHN"
+						{
+							// key count
+							int32 0
+							// for each key count
+							// frame number
+							float 0
+							// rotation as float quaternion (w, x, y, z)
+							float 0 // w
+							float 0 // x
+							float 0 // y
+							float 0 // z
+						}
+					}
+					// static rotation data
+					chunk "SROT"
+					{
+						// for each of static rotation count from INFO chunk
+						// read as float quaternion (w, x, y, z)
+						float 0 // w
+						float 0 // x
+						float 0 // y
+						float 0 // z
+					}
+					// animated translation channels
+					form "ATRN"
+					{
+						// for each of translation channel count from INFO chunk
+						chunk "CHNL"
+						{
+							// key count
+							int32 0
+							// for each key count
+							// frame number
+							int32 0
+							// value
+							float 0
+						}
+					}
+					// static translation data
+					chunk "STRN"
+					{
+						// for each of static translation count from INFO chunk
+						// static translation
+						float 0
+					}
+					// animation messages
+					form "MSGS"
+					{
+						chunk "INFO"
+						{
+							// number of messages
+							int16 0
+						}
+						// for each message
+						chunk "MESG"
+						{
+							// signal count
+							int16 0
+							// signal name
+							// e.g., event_vocalize
+							cstring ""
+							// for each signal count
+							// trigger frame number
+							int16 0
+						}
+					}
+					// locomotion translation data
+					chunk "LOCT"
+					{
+						// average translational speed
+						float 0
+						// key count
+						int16 0
+						// for each key count
+						// frame number
+						int16 0
+						// translation as float vector (x, y, z)
+						float 0 // x
+						float 0 // y
+						float 0 // z
+					}
+					// locomotion rotation data
+					chunk "LOCR"
+					{
+						// key count
+						int16 0
+						// for each key count
+						// frame number
+						int16 0
+						// rotation as float quaternion (w, x, y, z)
+						float 0 // w
+						float 0 // x
+						float 0 // y
+						float 0 // z
+					}	
+				}
+			}
+
+			// -------------------- ex: proxy skeletal animation template
+			form "PXAT"
+			{
+				// version 0 (latest)
+				form "0000"
+				{
+					chunk "INFO"
+					{
+						// template name
+						cstring ""
+					}
+					// can be EITHER OR of the following tags:
+					// uniform priority animation
+					chunk "PUNF"
+					{
+						// locomotion priority group
+						cstring ""
+						// uniform transform priority group
+						cstring ""
+					}
+					// OR:
+					// masked priority animation
+					chunk "PPTR"
+					{
+						// locomotion priority group
+						cstring ""
+						// transform mask name
+						cstring ""
+						// mask "in" group transform priorty group
+						cstring ""
+						// mask "out" group transform priority group
+						cstring ""
+					}
+				}
+			}
+			
+			// -------------------- ex: priority blend animation template
+			form "PBAT"
+			{
+				// version 0 (latest)
+				form "0000"
+				{
+					chunk "INFO"
+					{
+						// primary component animation index
+						int8 0
+					}
+					// insert here any of the available animation TAGS as children (e.g. SSAT, PBAT)
+				}
+			}
+			
+			// -------------------- ex: speed skeletal animation template
+			form "SPAT"
+			{
+				// version 0 (latest)
+				form "0000"
+				{
+					chunk "INFO"
+					{
+						// choice template count
+						int8 0
+					}
+					// for each choice template count
+					// insert here any of the available animation TAGS as children (e.g. SSAT, PBAT)
+				}
+			}
+			
+			// -------------------- ex: string selector skeletal animation template
+			form "SSAT"
+			{
+				// version 0 (latest)
+				form "0000"
+				{
+					chunk "INFO"
+					{
+						// variable name
+						cstring ""
+					}
+					// animation templates
+					form "ANMS"
+					{
+						chunk "INFO"
+						{
+							// template count
+							int16 0
+						}
+						// for each template count
+						// insert here any of the available animation TAGS as children (e.g. SSAT, PBAT)
+					}
+					// value mappings
+					chunk "VALS"
+					{
+						// value count
+						int16 0
+						// for each value count
+						// template name
+						cstring ""
+						// template index
+						int16 0
+					}
+					// default template
+					chunk "DFLT"
+					{
+						// template index
+						int16 0
+					}
+				}
+			}
+			
+			// -------------------- ex: time scale skeletal animation template
+			form "TSCL"
+			{
+				// version 0 (latest)
+				form "0000"
+				{
+					chunk "INFO"
+					{
+						// time scale
+						float 0
+					}
+					// insert here any of the available animation TAGS as children (e.g. SSAT, PBAT)
+				}
+			}
+			
+			// -------------------- ex: yaw skeletal animation template
+			form "YWAT"
+			{
+				// version 0 (latest)
+				form "0000"
+				{
+					// yaw left
+					form "YNEG"
+					{
+						// insert here any of the available animation TAGS as children (e.g. SSAT, PBAT)	
+					}
+					// yaw right
+					form "YPOS"
+					{
+						// insert here any of the available animation TAGS as children (e.g. SSAT, PBAT)	
+					}
+					// no yaw
+					form "NONE"
+					{
+						// insert here any of the available animation TAGS as children (e.g. SSAT, PBAT)	
+					}
+				}
+			}
+		}
+	}
+}

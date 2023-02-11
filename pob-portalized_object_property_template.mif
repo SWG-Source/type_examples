@@ -1,0 +1,230 @@
+//===================================================================
+//
+// Portalized Object (.pob) Example Template
+//
+// @author Aconite
+// @since SWG Source 2022
+// @see sharedObject/PortalPropertyTemplate.cpp
+// @see sharedPathfinding/SimplePathGraph.cpp
+//
+//===================================================================
+
+#pragma extension "pob"
+
+form "PRTO"
+{
+	// version 4 (latest)
+	form "0004"
+	{
+		chunk "DATA"
+		{
+			// number of portals
+			int32 0
+			// number of cells
+			int32 0
+		}
+	}
+	// start portal geometry
+	form "PRTS"
+	{
+		// start for each of indexed triangle list form
+		form "IDTL"
+		{
+			// version 0 (latest)
+			form "0000"
+			{
+				chunk "VERT"
+				{
+					// float vector for each verticies
+					float 0 // x
+					float 0 // y
+					float 0 // z
+				}
+				chunk "INDX"
+				{
+					// int32 for each index
+					int32 0
+				}
+			}
+		}
+	}
+	// start list of cells
+	form "CELS"
+	{
+		// start for each cell
+		form "CELL"
+		{
+			// version 5 (latest)
+			form "0005"
+			{
+				chunk "DATA"
+				{
+					// number of portals in this cell
+					int32 0
+					// can this cell see the parent cell (0/1)
+					int8 0
+					// name of this cell
+					cstring "room1"
+					// appearance of this cell
+					cstring "appearance/xyz.apt"
+					// has floor (0/1)
+					int8 1
+					// floor name (if has floor = 1)
+					cstring "appearance/collision/xyz.flr"
+				}
+				// blank form here
+				form "NULL"
+				{
+				}
+				// for each portal (identified by count above)
+				form "PRTL"
+				{
+					// version 0005 (latest)
+					chunk "0005"
+					{
+						// is disabled (0/1)
+						int8 0
+						// is passable (0/1)
+						int8 1
+						// geometry index
+						int32 0
+						// is geometry winding clockwise (0/1)
+						int8 1
+						// target cell index (note: this is unused)
+						int32 0
+						// door style (see door_styles.tab)
+						cstring "default"
+						// has door hardpoint (0/1)
+						int8 1
+						// door hardpoint (as float transform mat 4x3)
+						float 0
+						float 0
+						float 0
+						float 0
+						float 0
+						float 0
+						float 0
+						float 0
+						float 0
+						float 0
+						float 0
+						float 0
+					}
+				}
+				// lights inside this cell
+				chunk "LGHT"
+				{
+					// number of lights
+					int32 0
+					// for each of the above number of lights:
+					// light type: 1 = ambient; 2 = parallel; 3 = point
+					int8 0
+					// diffuse color argb
+					float 0 // a
+					float 0 // r
+					float 0 // g
+					float 0 // b
+					// specular color argb
+					float 0 // a
+					float 0 // r
+					float 0 // g
+					float 0 // b
+					// light transform (as float transform mat 4x3)
+					float 0
+					float 0
+					float 0
+					float 0
+					float 0
+					float 0
+					float 0
+					float 0
+					float 0
+					float 0
+					float 0
+					float 0
+					// constant attenuation
+					float 0
+					// linear attenuation
+					float 0
+					// quadratic attenuation
+					float 0
+				}
+			}
+		}
+	}
+	// path graph factory
+	form "PGRF"
+	{
+		// version 0001
+		form "0001"
+		{
+			chunk "META"
+			{
+				// path graph type (cell = 0; building = 1; city = 2; none = 3)
+				int32 3
+			}
+			// path nodes
+			chunk "PNOD"
+			{
+				// count of nodes
+				int32 0
+				// for each of the above count
+				// index
+				int32 0
+				// id
+				int32 0
+				// key
+				int32 0
+				// path node type 
+				// cell portal = 0; cell waypoint = 1; cell poi = 2; building entrance = 3; building cell = 4; building portal = 5;
+				// city building entrance = 6; city waypoint = 7; city poi = 8; city building = 9; city entrance = 10;
+				// building cell part = 11; invalid = 12
+				int32 0
+				// position (float vector)
+				float 0 // x
+				float 0 // y
+				float 0 // z
+				// radius
+				float 0
+			}
+			// path edges
+			chunk "PEDG"
+			{
+				// count of edges
+				int32 0
+				// for each of the above count
+				// index A
+				int32 0
+				// index B
+				int32 0
+				// lane width right
+				float 0
+				// lane width left
+				float 0
+			}
+			// edge counts
+			chunk "ECNT"
+			{
+				// count
+				int32 0
+				// for each of the above count
+				// byte
+				uint8 0
+			}
+			// edge starts
+			chunk "ESTR"
+			{
+				// count
+				int32 0
+				// for each of the above count
+				// byte
+				uint8 0
+			}
+		}
+	}
+	chunk "CRC "
+	{
+		// portal property crc
+		int32 0
+	}
+}

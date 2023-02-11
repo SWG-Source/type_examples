@@ -1,0 +1,119 @@
+//===================================================================
+//
+// Animation State Hierarchy (.ash) Example Template
+//
+// @author Aconite
+// @since SWG Source 2022
+// @see clientSkeletalAnimation/EditableAnimationStateHierarchyTemplate.cpp
+// @see clientSkeletalAnimation/EditableAnimationState.cpp
+//
+//===================================================================
+
+#pragma extension "ash"
+
+form "ASHT"
+{
+	// version 2 (latest)
+	form "0002"
+	{
+		// editable animation state
+		form "STAT"
+		{
+			chunk "INFO"
+			{
+				// state name id
+				// e.g. root
+				cstring ""
+				// logical animation name
+				// e.g. loop_standing
+				cstring ""
+			}
+			// actions
+			form "ACTS"
+			{
+				chunk "INFO"
+				{
+					// number of actions
+					int16 0
+				}
+				
+				// for each action, enter either of the following chunks
+				// ACTN = Editable Basic Animation Action
+				// MVAC = Editable Movement Animation Action
+				
+				// example ACTN
+				form "ACTN"
+				{
+					// action name
+					// e.g., ag_look_nervous
+					cstring ""
+					// logical animation name
+					// (usually the same as action name)
+					cstring ""
+					// held item visibility disposition
+					// hide held item? (0/1)
+					int8 0
+					// apply animation as add? (0/1)
+					int8 0
+				}
+				
+				// example MVAC
+				// an MVAC is a collection of ACTN(s)
+				form "MVAC"
+				{
+					form "ACTN"
+					{
+					// action name
+					// e.g., ag_look_nervous
+					cstring ""
+					// logical animation name
+					// (usually the same as action name)
+					cstring ""
+					// held item visibility disposition
+					// hide held item? (0/1)
+					int8 0
+					// apply animation as add? (0/1)
+					int8 0
+					}
+				}
+			}
+			// links
+			form "LNKS"
+			{
+				chunk "INFO"
+				{
+					// number of links
+					int16 0
+				}
+				// for each link
+				// Editable Animation State Link
+				chunk "LINK"
+				{
+					// number of states in path
+					int16 0
+					// for each state in path
+					// destination path
+					// e.g., root
+					cstring ""
+					// end for each
+					// play logical animation? (0/1)
+					int8 0
+					// logical animation name
+					// e.g., crouched
+					cstring ""
+				}
+			}
+			// children
+			form "CHLD"
+			{
+				chunk "INFO"
+				{
+					// number of children
+					int16 0
+				}
+				// for each child, repeat the above STAT form and its body recursively
+				// e.g., form "STAT" {}...
+			}
+		}
+	}
+}

@@ -1,0 +1,170 @@
+//===================================================================
+//
+// Animation (.ans) Example Template
+//
+// @author Aconite
+// @since SWG Source 2022
+// @see clientSkeletalAnimation/CompressedKeyframeAnimationTemplate.cpp
+//
+//===================================================================
+//
+// note: you may consider using either the compressed format here or the standard keyframe format
+// see the logical animation table (lat) example template for formatting for both
+//
+//===================================================================
+
+#pragma extension "ans"
+
+form "CKAT"
+{
+	// version 1 (latest)
+	form "0001"
+	{
+		// general animation information
+		chunk "INFO"
+		{
+			// frames per second
+			float 0
+			// frame count
+			int16 0
+			// transform info count
+			int16 0
+			// rotation channel count
+			int16 0
+			// static rotation count
+			int16 0
+			// translation channel count
+			int16 0
+			// static translation count
+			int16 0
+		}
+		// transform info
+		form "XFRM"
+		{
+			// for each of transform info count from INFO chunk
+			chunk "XFIN"
+			{
+				// name
+				// e.g., leftear01
+				cstring ""
+				// has animated rotations? (0/1)
+				int8 0
+				// rotation channel index
+				int16 0
+				// translation mask
+				uint8 0
+				// x translation channel index 
+				int16 0
+				// y translation channel index
+				int16 0
+				// z translation channel index
+				int16 0
+			}
+		}
+		// animated rotation channels
+		form "AROT"
+		{
+			// for each rotation channel count from INFO chunk
+			chunk "QCHN"
+			{
+				// key count
+				int16 0
+				// compression format
+				int8 0 // x
+				int8 0 // y
+				int8 0 // z
+				// for each key count
+				// frame number
+				uint16 0
+				// compressed rotation
+				uint32 0
+			}
+		}
+		// static rotation data
+		chunk "SROT"
+		{
+			// for each of static rotation count from INFO chunk
+			// x format
+			uint8 0
+			// y format
+			uint8 0
+			// z format
+			uint8 0
+			// compressed rotation value
+			uint32 0
+		}
+		// animated translation channels
+		form "ATRN"
+		{
+			// for each of translation channel count from INFO chunk
+			chunk "CHNL"
+			{
+				// key count
+				int16 0
+				// for each key count
+				// frame number
+				int16 0
+				// value
+				float 0
+			}
+		}
+		// static translation data
+		chunk "STRN"
+		{
+			// for each of static translation count from INFO chunk
+			// static translation
+			float 0
+		}
+		// animation messages
+		form "MSGS"
+		{
+			chunk "INFO"
+			{
+				// number of messages
+				int16 0
+			}
+			// for each message
+			chunk "MESG"
+			{
+				// signal count
+				int16 0
+				// signal name
+				// e.g., event_vocalize
+				cstring ""
+				// for each signal count
+				// trigger frame number
+				int16 0
+			}
+		}
+		// locomotion translation data
+		chunk "LOCT"
+		{
+			// average translational speed
+			float 0
+			// key count
+			int16 0
+			// for each key count
+			// frame number
+			int16 0
+			// translation as float vector (x, y, z)
+			float 0 // x
+			float 0 // y
+			float 0 // z
+		}
+		// locomotion rotation data
+		chunk "QCHN"
+		{
+			// key count
+			int16 0
+			// compression format
+			int8 0 // x
+			int8 0 // y
+			int8 0 // z
+			// for each key count
+			// frame number
+			uint16 0
+			// compressed rotation
+			uint32 0
+		}
+	}
+}

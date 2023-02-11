@@ -1,0 +1,169 @@
+//===================================================================
+//
+// Floor (.flr) Example Template
+//
+// @author Aconite
+// @since SWG Source 2022
+// @see sharedCollision/FloorMesh.cpp
+// @see sharedPathfinding/SimplePathGraph.cpp
+//
+//===================================================================
+
+#pragma extension "flr"
+
+form "FLOR"
+{
+	// version form, 0006 is the latest
+	form "0006"
+	{
+		chunk "VERT"
+		{
+			// vertex count
+			int32 0
+			// then, for each vertex, a float vector (x, y, z)
+			float 0 // x
+			float 0 // y
+			float 0 // z
+		}
+		chunk "TRIS"
+		{
+			// triangle count
+			int32 0
+			// then, for each triangle:
+			// triangle normal as float vector (x, y, z)
+			float 0 // x
+			float 0 // y
+			float 0 // z
+			// then, the edge type for the three edges of the tri
+			// where uncrossable = 0, crossable = 1, wall base = 2, wall top = 3
+			// edge 0
+			uint8 0
+			// edge 1
+			uint8 0
+			// edge 2
+			uint8 0
+			// is fallthrough (0/1)
+			int8 0
+			// part tag
+			int32 0
+			// portal ID for edge 0
+			int32 0
+			// portal ID for edge 1
+			int32 0
+			// portal ID for edge 2
+			int32 0
+		}
+		// box tree, if there's > 10 triangles
+		form "BTRE"
+		{
+			// verion tag, 0000 is only version
+			form "0000"
+			{
+				chunk "NODS"
+				{
+					// node count
+					int32 0
+					// for each node
+					// max float vector
+					float 0 // x
+					float 0 // y
+					float 0 // z
+					// min float vector
+					float 0 // x
+					float 0 // y
+					float 0 // z
+					// index 
+					int32 0
+					// user id
+					int32 0
+					// index A
+					int32 0
+					// index B
+					int32 0
+				}
+			}
+		}
+		chunk "BEDG"
+		{
+			// edge count
+			int32 0
+			// for each edge:
+			// triangle id
+			int32 0
+			// edge id
+			int32 0
+			// is crossable (0/1)
+			int8 0
+		}
+		// path graph factory
+		form "PGRF"
+		{
+			// version 0001
+			form "0001"
+			{
+				chunk "META"
+				{
+					// path graph type (cell = 0; building = 1; city = 2; none = 3)
+					int32 3
+				}
+				// path nodes
+				chunk "PNOD"
+				{
+					// count of nodes
+					int32 0
+					// for each of the above count
+					// index
+					int32 0
+					// id
+					int32 0
+					// key
+					int32 0
+					// path node type 
+					// cell portal = 0; cell waypoint = 1; cell poi = 2; building entrance = 3; building cell = 4; building portal = 5;
+					// city building entrance = 6; city waypoint = 7; city poi = 8; city building = 9; city entrance = 10;
+					// building cell part = 11; invalid = 12
+					int32 0
+					// position (float vector)
+					float 0 // x
+					float 0 // y
+					float 0 // z
+					// radius
+					float 0
+				}
+				// path edges
+				chunk "PEDG"
+				{
+					// count of edges
+					int32 0
+					// for each of the above count
+					// index A
+					int32 0
+					// index B
+					int32 0
+					// lane width right
+					float 0
+					// lane width left
+					float 0
+				}
+				// edge counts
+				chunk "ECNT"
+				{
+					// count
+					int32 0
+					// for each of the above count
+					// byte
+					uint8 0
+				}
+				// edge starts
+				chunk "ESTR"
+				{
+					// count
+					int32 0
+					// for each of the above count
+					// byte
+					uint8 0
+				}
+			}
+		}
+	}
+}

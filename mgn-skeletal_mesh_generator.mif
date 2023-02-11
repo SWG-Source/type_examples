@@ -1,0 +1,394 @@
+//===================================================================
+//
+// Skeletal Mesh Generator Template (.mgn) Example Template
+//
+// @author Aconite
+// @since SWG Source 2022
+// @see clientSkeletalAnimation/SkeletalMeshGeneratorTemplate.cpp
+//
+//===================================================================
+
+#pragma extension "mgn"
+
+form "SKMG"
+{
+	// version 4 (latest)
+	form "0004"
+	{
+		chunk "INFO"
+		{
+			// max transforms per vertex
+			int32 0
+			// max transforms per shader
+			int32 0
+			// skeleton template name count
+			int32 0
+			// transform name count
+			int32 0
+			// position count
+			int32 0
+			// transform weight data count
+			int32 0
+			// normal count
+			int32 0
+			// per shader data count
+			int32 0
+			// blend target count
+			int32 0
+			// occlusion zone count
+			int16 0
+			// occlusion zone combination count
+			int16 0
+			// zones this occludes count
+			int16 0
+			// occlusion layer
+			int16 0
+		}
+		// skeleton template names required on skeleton to which this mesh is bound
+		chunk "SKTM"
+		{
+			// for each of "skeleton template name count" defined in INFO chunk
+			// skeleton template name(s)
+			// e.g., appearance/skeleton/camel.skt
+			cstring ""
+		}
+		// transform names
+		chunk "XFNM"
+		{
+			// for each of "transform name count" defined in INFO chunk
+			// transform name(s)
+			// e.g., root, tail, spine, jaw, nose, head
+			cstring ""
+		}
+		// position vectors
+		chunk "POSN"
+		{
+			// for each of "position count" defined in INFO chunk
+			// position vector(s) as float vector (x, y, z)
+			float 0 // x
+			float 0	// y
+			float 0 // z
+		}
+		// transform weighting header information
+		chunk "TWHD"
+		{
+			// for each of "position count" defined in INFO chunk
+			// transform weight count(s)
+			int32 0
+		}
+		// transform weighting data
+		chunk "TWDT"
+		{
+			// for each of "transform weight data count" defined in INFO chunk
+			// transform index
+			int32 0
+			// transform weight
+			float 0
+		}
+		// normal vectors
+		chunk "NORM"
+		{
+			// for each of "normal count" defined in INFO chunk
+			// normal as float vector (x, y, z)
+			float 0 // x
+			float 0 // y
+			float 0 // z
+		}
+		// dot3 per-pixel-lighting vectors
+		chunk "DOT3"
+		{
+			// count of dot3 vectors
+			int32 0
+			// for each from count of dot3 vectors
+			// Dot3Vector
+			float 0 // x
+			float 0 // y
+			float 0 // z
+			float 0 // flip state
+		}
+		// hardpoints
+		form "HPTS"
+		{
+			// static (non-morphable hardpoints)
+			chunk "STAT"
+			{
+				// hardpoint count
+				int16 0
+				// for each of hardpoint count
+				// hardpoint name
+				cstring ""
+				// hardpoint parent name
+				cstring ""
+				// rotation as quaternion (w, x, y, z)
+				float 0 // w
+				float 0 // x
+				float 0 // y
+				float 0 // z
+				// position as float vector (x, y, z)
+				float 0 // x
+				float 0 // y
+				float 0 // z
+			}
+			// dynamic (morphable) hardpoints
+			chunk "DYN " // note this is a TAG3
+			{
+				// hardpoint count
+				int16 0
+				// for each of hardpoint count
+				// hardpoint name
+				cstring ""
+				// hardpoint parent name
+				cstring ""
+				// rotation as quaternion (w, x, y, z)
+				float 0 // w
+				float 0 // x
+				float 0 // y
+				float 0 // z
+				// position as float vector (x, y, z)
+				float 0 // x
+				float 0 // y
+				float 0 // z
+			}
+		}
+		// blend targets
+		// only loaded if blend target count from INFO chunk is > 0
+		// typically used by clothes
+		form "BLTS"
+		{
+			// for each of "blend target count" in INFO chunk
+			form "BLT " // note this is a TAG3
+			{
+				chunk "INFO"
+				{
+					// position count
+					int32 0
+					// normal count
+					int32 0
+					// customization variable path name
+					// note: /shared_owner/ is appended by client so only include path data subsquent to that directory
+					// e.g., blend_muscle, blend_fat
+					cstring ""
+				}
+				// position data
+				chunk "POSN"
+				{
+					// for each of "position count" from BLT > INFO chunk 
+					// index
+					int32 0
+					// position as float vector (x, y, z)
+					float 0 // x
+					float 0 // y
+					float 0 // z
+				}
+				// normal data
+				chunk "NORM"
+				{
+					// for each of "noraml count" from BLT > INFO chunk
+					// index
+					int32 0
+					// normal as float vector (x, y, z)
+					float 0 // x
+					float 0 // y
+					float 0 // z
+				}
+				// dot3 per-pixel-lighting normal map
+				chunk "DOT3"
+				{
+					// dot3 vector count
+					int32 0
+					// for each of dot3 vector count
+					// index
+					int32 0
+					// vector as float vector (x, y, z)
+					float 0 // x
+					float 0 // y
+					float 0 // z
+				}
+				// affected hardpoint data
+				chunk "HPTS"
+				{
+					// hardpoint count
+					int16 0
+					// for each of hardpoint count
+					// dynamic hardpoint index
+					// note: this is reverse order (position then rotation) of other HPTS chunk
+					int16 0
+					// delta position as float vector (x, y, z)
+					float 0 // x
+					float 0 // y
+					float 0 // z
+					// delta rotation as float quaternion (w, x, y, z)
+					float 0 // w
+					float 0 // x
+					float 0 // y
+					float 0 // z
+				}
+			}
+		}
+		// occlusion zone names (if "occlusion zone count" from INFO chunk is > 0)
+		chunk "OZN " // note this is a TAG3
+		{
+			// for each of "occlusion zonec ount" from INFO chunk
+			// occlusion zone name
+			// e.g., "r_arm", "chest", etc.
+			cstring ""
+		}
+		// fully occluded zone combination
+		chunk "FOZC"
+		{
+			// count
+			int16 0
+			// for each of count
+			// local occlusion zone index relative to mesh's OZ name list
+			int16 0
+		}
+		// occlusion zone combination count (if "occlusion zone combination count" from INFO chunk is > 0)
+		chunk "OZC " // note this is a TAG3
+		{
+			// for each of occlusion zone combination count
+			// combination zone count
+			int16 0
+			// for each of combination zone count
+			// local occlusion zone index relative to mesh's oZ name list
+			int16 0
+		}
+		// occlusion zones that this mesh occludes (if "zones this occludes count) from INFO chunk is > 0)
+		chunk "ZTO " // note this is a TAG3
+		{
+			// for each of "zones this occludes count" from INFO chunk
+			// local occlusion zone index relative to mesh's oZ name list
+			int16 0
+		}
+		// per shader data
+		form "PSDT"
+		{
+			// shader template name
+			chunk "NAME"
+			{
+				// shader template name
+				// e.g. "shader/chef_jacket.sht"
+				cstring ""
+			}
+			// shader vertex position indices (indexes into mesh's positions)
+			chunk "PIDX"
+			{
+				// vertex count
+				int32 0
+				// for each vertex count
+				// position index
+				int32 0
+			}
+			// shader vertex normal indicies
+			chunk "NIDX"
+			{
+				// for each of vertex count from PSDT > PIDX chunk
+				// normal index
+				int32 0
+			}
+			// dot3 per-pixel lighting vectors
+			chunk "DOT3"
+			{
+				// for each of vertex count from PSDT > PIDX chunk
+				// dot3 vector index
+				int32 0
+			}
+			// vertex diffuse color info
+			chunk "VDCL"
+			{
+				// for each of vertex count from PSDT > PIDX chunk
+				// Packed ARGB
+				int8 0 // a
+				int8 0 // r
+				int8 0 // g
+				int8 0 // b
+			}
+			// texture coordinate info
+			chunk "TXCI"
+			{
+				// texture coordinate set count
+				int32 0
+				// for each of texture coordinate set count
+				// texture coordinate set dimensionality
+				int32 0
+			}
+			// texture coordinate sets
+			form "TCSF"
+			{
+				// for each of "texture coordinate set count" from PSDT > TXCI chunk
+				chunk "TCSD"
+				{
+					// for vertex count from PSDT > PIDX chunk multiplied by (*) texture coordinate set count from PSDT > TXCI chunk
+					// set data
+					float 0
+				}
+			}
+			// shader draw primitive information
+			form "PRIM"
+			{
+				// info
+				chunk "INFO"
+				{
+					// primitive count
+					int32 0
+				}
+				// for each of primitive count
+				// switch through any of the following two TAG for each primitive count
+				// indexed triangle primitive list
+				chunk "ITL " // note this is a TAG3
+				{
+					// triangle count
+					int32 0
+					// for each of triangle count
+					// triangle coordinates
+					// index 0
+					int32 0
+					// index 1
+					int32 0
+					// index 2
+					int32 0
+				}
+				// occluded indexed triangle primitive list
+				chunk "OITL"
+				{
+					// triangle count
+					int32 0
+					// for each of triangle count
+					// occlusion zone combination index
+					int16 0
+					// triangle coordinates
+					// index 0
+					int32 0
+					// index 1
+					int32 0
+					// index 2
+					int32 0
+				}
+			}
+		}
+		// texture render template info
+		form "TRTS"
+		{
+			// info
+			chunk "INFO"
+			{
+				// header count
+				int32 0
+				// entry count (used for memory reserve only)
+				int32 0
+			}
+			// for each of header count
+			chunk "TRT " // note this is a TAG3
+			{
+				// texture renderer template name
+				cstring ""
+				// affected shader count
+				int32 0
+				// for each of affected shader count
+				// shader index
+				int32 0
+				// shader texture tag (int32 > Tag)
+				int32 0
+			}
+		}
+	}
+}
